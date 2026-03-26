@@ -48,4 +48,13 @@ Start-Step "Running PCA smoke test" {
     }
 }
 
+Start-Step "Generating model comparison report" {
+    Push-Location (Join-Path $ProjectRoot "demo")
+    try {
+        & $condaExe run -p $envPath --no-capture-output python project_model_comparison_report.py
+    } finally {
+        Pop-Location
+    }
+}
+
 Write-Host "`nSetup and smoke test completed successfully." -ForegroundColor Green

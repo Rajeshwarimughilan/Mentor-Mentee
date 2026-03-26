@@ -138,6 +138,16 @@ def evaluate_model(model_name, spec, x_train_raw, y_train, x_test_raw, y_test):
     }
 
 
+def dataframe_to_markdown(df):
+    headers = list(df.columns)
+    header_line = '| ' + ' | '.join(headers) + ' |'
+    separator_line = '| ' + ' | '.join(['---'] * len(headers)) + ' |'
+    row_lines = []
+    for row in df.itertuples(index=False):
+        row_lines.append('| ' + ' | '.join(str(v) for v in row) + ' |')
+    return '\n'.join([header_line, separator_line] + row_lines)
+
+
 def main():
     args = parse_args()
     selected_models = [m.strip() for m in args.models.split(',') if m.strip()]
@@ -171,7 +181,7 @@ def main():
     with open(md_path, 'w', encoding='utf-8') as f:
         f.write('# Model Comparison Report\n\n')
         f.write('Sorted by `security_score` (higher is better).\n\n')
-        f.write(df.to_markdown(index=False))
+        f.write(dataframe_to_markdown(df))
         f.write('\n')
 
     print('\n====== Comparison summary ======')

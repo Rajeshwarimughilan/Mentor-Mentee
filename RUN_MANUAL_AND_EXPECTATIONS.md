@@ -15,6 +15,10 @@ Expected:
   - Transformed train/test shape
   - Model summary
   - Train and test Precision/Recall/F1
+- Additional feature runs automatically:
+  - `project_model_comparison_report.py` executes
+  - `outputs/model_comparison.csv` is generated
+  - `outputs/model_comparison.md` is generated
 
 ## Manual run of demos
 From project root:
